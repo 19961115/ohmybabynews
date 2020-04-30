@@ -1,0 +1,5 @@
+com\uestc\ohmynews\web\NewsController.class
+com\uestc\ohmynews\aspect\LogAspect.class
+com\uestc\ohmynews\util\UserUtil.class
+com\uestc\ohmynews\service\MailService.class
+com\uestc\ohmynews\OhmynewsApplication.class
