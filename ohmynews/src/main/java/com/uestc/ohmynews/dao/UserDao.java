@@ -12,8 +12,8 @@ import java.util.List;
 public interface UserDao {
 //增
 //添加用户信息
-    @Insert({"insert into user(user_name,password,role,email)"})
-    void addUser(User user);
+    @Insert({"insert into user(user_name,password,role) values(#{user_name},#{password},#{role})"})
+    void addUser(String user_name,String password,int role);
 
 //删
     //通过邮箱删除用户
@@ -21,18 +21,18 @@ public interface UserDao {
     void  deleteUserByEmail(String email);
     //通过id删除用户
     @Delete({"delete from user where user_id=#{user_id}"})
-    void deleteUserById(int user_id);
+    void deleteUserByUser_id(int user_id);
 
 //改
 
     //通过邮箱修改用户名
-    @Update({"update user set user_name=#{user_name} where email=#{email}"})
-    void updateUserNameByEmail(String user_name,String email);
+    @Update({"update user set user_name=#{user_name} where user_id=#{user_id}"})
+    void updateUserNameByUser_id(String user_name,int user_id);
 
 
     //通过邮箱修改密码
-    @Update({"update user set password=#{password} where email=#{email}"})
-    void updatePasswordByEmail(String password,String email);
+    @Update({"update user set password=#{password} where user_id=#{user_id}"})
+    void updatePasswordByUser_id(String password,int user_id);
 
 //查
 
@@ -44,9 +44,9 @@ public interface UserDao {
     @Select({"select * from user where email=#{email}"})
     User findUSerByEmail(String email);
 
-    //通过邮箱和密码查询
-    @Select({"select * from user where email=#{email} and password=#{password}"})
-    User findUserByEmailAndPassword(String email, String password);
+    //通过用户名和密码查询
+    @Select({"select * from user where user_name=#{user_name} and password=#{password}"})
+    User findUserByUser_nameAndPassword(String user_name, String password);
 
     //通过用户id查找用户
     @Select({"select * from user where user_id=#{user_id}"})
@@ -69,7 +69,7 @@ public interface UserDao {
                             fetchType= FetchType.EAGER)
             )
     })
-    User getUserByUser_id(int user_id);
+    User getNewsByUser_id(int user_id);
 
 
 }

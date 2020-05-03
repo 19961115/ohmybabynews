@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
 </head>
 <body>
-
+<form class="ui large form" method="post" action="#" th:action="@{/admin/register}">
+    <div class="ui  segment">
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="user_name" placeholder="user_name">
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="password">
+            </div>
+        </div>
+        <button class="ui fluid large teal submit button">login</button>
+    </div>
+</form>
 </body>
 </html>

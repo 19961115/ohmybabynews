@@ -12,8 +12,8 @@ import java.util.Set;
 public interface NewsDao {
 //增
     //实现新闻的增加
-    @Insert({"insert into news(news_name,type,label,description,user_id)"})
-void addNews(String news_name,String type,String label,String description,int user_id);
+    @Insert({"insert into news(news_name,image,description,user_id)"})
+void addNews(String news_name,String image,String description,int user_id);
 
 
 //删
@@ -30,33 +30,29 @@ void deleteNewsByNews_name(String news_name);
     //通过新闻id修改新闻名称
     @Update({"update news set news_name=#{news_name} where news_id=#{news_id}"})
 void updateNewsNameByNews_id(String news_name,int news_id);
-    //通过新闻id修改新闻类别
-    @Update({"update news set type=#{type} where news_id=#{news_id}"})
-    void updateNewsTypeByNews_id(String type,int news_id);
-    //通过新闻id修改新闻标签
-    @Update({"update news set label=#{label} where news_id=#{news_id}"})
-    void updateNewsLabelByNews_id(String label,int news_id);
+    //通过新闻id修改新闻图片
+    @Update({"update news set image=#{image} where news_id=#{news_id}"})
+    void updateNewsImageByNews_id(String image,int news_id);
+
 
 
 //查
 
-    //实现一对多查询
+    //实现与用户的一对多查询
     @Select("select * from news where user_id=#{user_id}")
-    public Set<News> getNewsByUser_id(int user_id);
+     Set<News> getNewsByUser_id(int user_id);
+    //实现与类别的一对多查询
+    @Select({"select * form news where type_id=#{type_id}"})
+    List<News> getNewsByType_id(int type_id);
 
     //通过新闻名称查询新闻
     @Select({"select * from news where news_name=#{news_name}"})
     List<News> findNewsByNews_name(String news_name);
-    //通过新闻标签查询新闻
-    @Select({"select * from news where label=#{label}"})
-    List<News>findNewsByLabel(String label);
-    //通过新闻类别查询新闻
-    @Select({"select * from news where type=#{type}"})
-    List<News> findNewsByType(String type);
     //查询所有新闻
     @Select({"select * from news"})
     List<News>findAllNews();
     //通过用户id新闻
     @Select({"select * from news where user_id=#{user_id}"})
     List<News> findNewsByUser_id(int user_id);
+
 }
